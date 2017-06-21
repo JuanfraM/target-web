@@ -1,0 +1,17 @@
+$dark-color: #222;
+$white-color: #fff;
+
+.app {
+  text-align: center;
+}
+
+.app-header {
+  background-color: $dark-color;
+  color: $dark-color;
+  height: 150px;
+  padding: 20px;
+}
+
+.app-intro {
+  font-size: large;
+}
