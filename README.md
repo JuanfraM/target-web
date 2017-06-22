@@ -1,32 +1,59 @@
-# Dependencies
- - Node.js for running development server
- - npm for handling JS packages
- - Webpack to bundle our files into static assets for the web server
+# React Redux Base
 
-**Note:**  *recommended Node >= 6 and npm >= 3 for faster installation speed and better disk usage*
+## Npm commands
+1. **Run the app**. `yarn start` or `npm start`
+2. **Build the app**. `yarn build` or `npm run build`
+3. **Lint the app**. `yarn lint` or `npm run lint`
+4. **Test the app**. `yarn test` or `npm run test`
 
-# Getting Started
- 1. Clone the repo
- 2. Enter its directory
- 3. Install Webpack `$ npm i webpack@1.13.2 -g`
- 4. Install Webpack Dev Server `$ npm install webpack-dev-server@1.16.1 -g` *(might need sudo)*
- 5. Install project dependencies `$ npm install`
- 6. Start the dev server to get the server running on port 3000! `$ npm start`
+## Getting Started
+1. Clone the repository
+2. Install dependencies: `yarn` or `npm install`
+3. Create two constants files in `./src` folder(devConstant.js and prodConstants.js):
+  * devConstants is used while you are developing(on `npm start` script)
+  * prodConstats is used once you build the app(on `npm run build` script)
 
-# Running tests
- 1. Simply run `$ npm run test` to have a watcher running tests on the background
+  Those files should include the `API_URL` constant.
 
-# What's included
- - [**ReactJS**](https://facebook.github.io/react/)
- - [**Redux**](http://redux.js.org)
- - [**react-redux**](https://github.com/reactjs/react-redux) which brings a nice way to integrate both
- - [**redux-devtools**](https://github.com/facebook/react-devtools) for debugging
- - [**react-router**](https://github.com/ReactTraining/react-router) for routing
- - [**redux-form**](http://redux-form.com/) for form handling using Redux
- - [**validate.js**](https://validatejs.org) for form validation
- - [**Webpack**](https://webpack.github.io/) for bundling JS and other assets into static files
- - [**axios**](https://github.com/mzabriskie/axios) library to make remote HTTP requests using promises
- - [**Mocha**](https://mochajs.org/) Mocha for running JS tests
- - [**Chai**](http://chaijs.com/) Chai for test assertions
- - **Babel** with its ES6 and React presets to transpile our code to normal JS since ES6 and JSX are not fully supported by all browsers
- - Linting libraries for JS ES6, Babel and JSX for dev environments
+  devConstants.js or prodConstants.js example:
+  ```javascript
+  export const config = {
+    API_URL: 'http://your-api-url.com'
+  };
+  ```
+4. Start the dev server: `yarn start` or `npm start -s`
+
+## Initial Machine Setup
+**Install [Node 4.0.0 or greater](https://nodejs.org)** - (6.0 or greater is recommended for optimal build performance). Need to run multiple versions of Node? Use [nvm](https://github.com/creationix/nvm).
+
+**Install [Yarn](https://yarnpkg.com/en/docs/install)** - Fast, reliable, and secure package manager
+
+## Deploying to AWS S3
+1. **Install [AWS CLI](http://docs.aws.amazon.com/cli/latest/userguide/installing.html)**
+2. **Configure AWS** with the command `aws configure`
+3. **Set the buckets for your app** in the script `/tools/deployS3.js`
+4. **Run the command to deploy** `npm run deploy:staging` or `npm run deploy:production`
+
+## Technologies
+
+| **Tech** | **Description**
+|----------|-------
+|  [React](https://facebook.github.io/react/)  |   Fast, composable client-side components.|
+|  [Redux](http://redux.js.org) |  Enforces unidirectional data flows and immutable, hot reloadable store. Supports time-travel debugging.|
+|  [React Router](https://github.com/reactjs/react-router) | A complete routing library for React |
+|  [Babel](http://babeljs.io) |  Compiles ES6 to ES5. Enjoy the new version of JavaScript today.|
+| [Webpack](http://webpack.github.io) | Bundles npm packages and our JS into a single file. Includes hot reloading via [React Hot Loader](https://github.com/gaearon/react-hot-loader). |
+| [Express](https://github.com/expressjs/express) | Fast, unopinionated, minimalist web framework for node. |
+| [Jest](https://facebook.github.io/jest/) | Automated tests with built-in expect assertions and  [Enzyme](https://github.com/airbnb/enzyme) for DOM testing without a browser using Node. |
+| [ESLint](http://eslint.org/)| Lint JS. Reports syntax and style issues. Using [eslint-plugin-react](https://github.com/yannickcr/eslint-plugin-react) for additional React specific linting rules. |
+| [SASS](http://sass-lang.com/) | Compiled CSS styles with variables, functions, and more.
+| [PostCSS](https://github.com/postcss/postcss) | Transform styles with JS plugins. Used to autoprefix CSS |
+| [Editor Config](http://editorconfig.org) | Enforce consistent editor settings (spaces vs tabs, etc). |
+| [npm Scripts](https://docs.npmjs.com/misc/scripts)| Glues all this together in a handy automated build. |
+| [Stylelint](https://github.com/stylelint/stylelint) | Modern CSS linter that helps you enforce consistent conventions and avoid errors in your stylesheets. |
+| [LocalForage](https://github.com/localForage/localForage) |  Fast and simple storage library, improves the offline experience of your web app by using asynchronous storage (IndexedDB or WebSQL) |
+| [ReduxForm](http://redux-form.com/6.4.3/) | Redux-form works with React Redux to enable an html form in React to use Redux to store all of its state. |
+| [Isomorphic Fetch](https://github.com/matthew-andrews/isomorphic-fetch) |  Is a Promise-based mechanism for programatically making web requests in the browser. |
+| [Validate.js](https://validatejs.org/) | Provides a declarative way of validating javascript objects. |
+| [Humps](https://github.com/domchristie/humps) | Underscore-to-camelCase converter (and vice versa) for strings and object keys in JavaScript.|
+| [Immutable.js](https://github.com/facebook/immutable-js/) | Immutable persistent data collections for Javascript which increase efficiency and simplicity. |

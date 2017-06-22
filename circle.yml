@@ -1,15 +1,15 @@
 machine:
-  # Version of ruby to use
-  ruby:
-    version:
-      2.3.1
-
+  node:
+    version: v6.1.0
+  environment:
+    PATH: "${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"
 dependencies:
-  pre:
-    - gem install scss_lint
-
+  override:
+    - yarn
+  cache_directories:
+    - ~/.cache/yarn
 test:
   override:
-    - npm run test
+    - yarn test
   post:
-    - npm run lint --silent # silent prevents the ELIFECYCLE error
+    - yarn run lint

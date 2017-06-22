@@ -1,22 +1,32 @@
 {
-  // I want to use babel-eslint for parsing!
+  "extends": [
+    "eslint:recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings"
+  ],
+  "plugins": [
+    "react",
+    "import"
+  ],
   "parser": "babel-eslint",
-  "env": {
-    // I write for browser
-    "browser": true,
-    // in CommonJS
-    "node": true,
-    // Jasmine testing
-    "jasmine": true,
-    "es6": true,
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true,
+      "experimentalObjectRestSpread": true
+    }
   },
-  // To give you an idea how to override rule options:
-  "extends": ["eslint:recommended", "plugin:react/recommended", "plugin:jasmine/recommended"],
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true,
+    "jquery": true,
+    "jest": true
+  },
   "rules": {
-    "no-mixed-requires": [0],
-    "no-console": "off",
-    react/prop-types: [2, {"ignore": ["className", "children", "id", "onClick", "style"]}],
     "quotes": 0,
+    "no-console": 1,
     "no-debugger": 1,
     "no-var": 1,
     "semi": [1, "always"],
@@ -38,6 +48,7 @@
     "object-curly-spacing": [1, "always"],
     "space-before-blocks" : [1, "always"],
     "keyword-spacing": 1,
+    "indent": [1, 2, { "SwitchCase": 1 }],
     "react/display-name": [ 1, { "ignoreTranspilerName": false }],
     "react/forbid-prop-types": [1, { "forbid": ["any"] }],
     "react/jsx-boolean-value": 0,
@@ -55,6 +66,7 @@
     "react/jsx-sort-props": 0,
     "react/jsx-uses-react": 1,
     "react/jsx-uses-vars": 1,
+    "react/jsx-wrap-multilines": 1,
     "react/no-danger": 1,
     "react/no-did-mount-set-state": 1,
     "react/no-did-update-set-state": 1,
@@ -63,20 +75,13 @@
     "react/no-set-state": 0,
     "react/no-unknown-property": 1,
     "react/prefer-es6-class": 1,
+    "react/prop-types": 1,
     "react/react-in-jsx-scope": 1,
-    "react/require-extension": 1,
     "react/self-closing-comp": 1,
     "react/sort-comp": 1,
-    "react/jsx-wrap-multilines": 1,
+    "import/extensions": 1
   },
-  "plugins": [
-    "react",
-    "jasmine"
-  ],
-  "settings": {
-    "react": {
-      "pragma": "React",  // Pragma to use, default to "React"
-      "version": "30.0" // React version, default to the latest React stable release
-    }
+  "globals": {
+    "config": true
   }
 }

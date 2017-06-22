@@ -1,9 +1,12 @@
-import loginReducer from './loginReducer.js';
-import logoutReducer from './logoutReducer.js';
-import signupReducer from './signupReducer.js';
+import { combineReducers } from 'redux';
+import { routerReducer } from 'react-router-redux';
+import { reducer as formReducer } from 'redux-form';
+import { sessionReducer } from 'redux-react-session';
 
-export {
-  loginReducer,
-  logoutReducer,
-  signupReducer,
-};
+const rootReducer = combineReducers({
+  form: formReducer,
+  routing: routerReducer,
+  session: sessionReducer
+});
+
+export default rootReducer;

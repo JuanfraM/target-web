@@ -1,41 +1,39 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import * as reducers from './reducers';
-import thunk from 'redux-thunk';
-import { reducer as formReducer } from 'redux-form';
-import axios from 'axios';
-import Config from 'Config';
+/* eslint-disable import/default */
 
-import { Router, browserHistory } from 'react-router';
-import routes from './routes';
-import './styles/index.scss';
+import React from 'react';
+import { render } from 'react-dom';
+import { browserHistory, applyRouterMiddleware } from 'react-router';
+import configureStore from './store/configureStore';
+import { syncHistoryWithStore } from 'react-router-redux';
+import { useScroll } from 'react-router-scroll';
+import { AppContainer } from 'react-hot-loader';
+import { sessionService } from 'redux-react-session';
+import Root from './containers/Root';
+import routes from './routes'; // eslint-disable-line import/no-named-as-default
+import './styles/styles.scss';
 
-Object.assign(reducers, { form: formReducer });
-const reducer = combineReducers(reducers);
-let store = createStore(
-  reducer,
-  applyMiddleware(thunk)
-);
+const store = configureStore();
 
-class ReduxAppWrapper extends Component {
-  componentWillMount() {
-    axios.defaults.headers.common['Content-Type'] = '*/*';
-    axios.defaults.headers.common['Accept'] = '*/*';
-    axios.defaults.baseURL = Config.serverUrl;
-  }
+// Create an enhanced history that syncs navigation events with the store
+const history = syncHistoryWithStore(browserHistory, store);
 
-  render() {
-    return (
-      <Provider store={store}>
-        <Router history={browserHistory} routes={routes} />
-      </Provider>
-    );
-  }
+sessionService.initSessionService(store);
+
+const appRoutes = routes;
+
+const renderApp = appRoutes => {
+  render(
+    <AppContainer>
+      <Root store={store} history={history} routes={appRoutes} render={applyRouterMiddleware(useScroll())}/>
+    </AppContainer>,
+    document.getElementById('app')
+  );
+};
+
+renderApp(appRoutes);
+
+if (module.hot) {
+  module.hot.accept('./routes', () => {
+    renderApp(appRoutes);
+  });
 }
-
-ReactDOM.render(
-  <ReduxAppWrapper />,
-  document.getElementById('react-root')
-);
