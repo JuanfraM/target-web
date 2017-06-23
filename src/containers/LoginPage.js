@@ -6,13 +6,16 @@ import { Link } from 'react-router';
 import * as sessionActions from '../actions/sessionActions';
 import LoginForm from '../components/session/LoginForm'; // eslint-disable-line import/no-named-as-default
 import { routes } from '../constants/routesPaths';
+import { Row, Column } from 'react-foundation';
 
 const LoginPage = ({ actions: { login } }) => (
-  <div>
-    <p>LOGIN</p>
-    <LoginForm onSubmit={login}/>
-    <Link to={routes.signUp}> Sign up </Link>
-  </div>
+  <Row className="display">
+    <Column medium={6}>
+      <p>LOGIN</p>
+      <LoginForm onSubmit={login}/>
+      <Link to={routes.signUp}> Sign up </Link>
+    </Column>
+  </Row>
 );
 
 const { object } = PropTypes;

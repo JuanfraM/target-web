@@ -2,10 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import Input from '../common/Input';
+import BlackButton from '../common/BlackButton';
 import * as constraints from '../../utils/constraints';
 
 const SignUpForm = ({ handleSubmit }) => (
   <form onSubmit={handleSubmit}>
+    <div>
+      <Field
+        name="name"
+        label="Name"
+        component={Input}
+        type="text"
+      />
+    </div>
     <div>
       <Field
         name="email"
@@ -18,6 +27,7 @@ const SignUpForm = ({ handleSubmit }) => (
       <Field
         name="password"
         label="Password"
+        placeholder="MIN. 6 CHARACTERS LONG"
         component={Input}
         type="password"
       />
@@ -30,7 +40,15 @@ const SignUpForm = ({ handleSubmit }) => (
         type="password"
       />
     </div>
-    <button type="submit">Submit</button>
+    <div>
+      <Field
+        name="gender"
+        label="Gender"
+        component={Input}
+        type="text"
+      />
+    </div>
+    <BlackButton label="SIGN UP"/>
   </form>
 );
 
